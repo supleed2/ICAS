@@ -95,15 +95,35 @@
 	</div>
 
 	<!-- Page Contents -->
-	<div class="container">
+	<div class="verify-body">
 		<h1>Verification Form</h1>
 		<p>When you submit the form below, your Imperial login details are checked using the Union login page and then
 			discarded, the only data saved is whether the login succeeded and your Imperial shortcode, to be connected
-			to your Discord account by Nano.</p>
+			to your Discord account by Nano. <b>Details input here will not be sent/visible to anyone nor will they be
+				stored at any point, and will only be used to verify the account is a valid Imperial login using the
+				Imperial eActivities API directly.</b></p>
 		<p>We don't want to ever know your login details as that's a whole GDPR and security nightmare. The code for
 			this website and the verification system is available on <a
 				href="https://github.com/supleed2/ICAS">GitHub</a>.</p>
-		<br><br>
+		<p><b>If you would prefer, you can continue to use verification via membership (if you have bought membership
+				this year) or manual verification, such as when verifying using College ID or an acceptance letter.</b>
+		</p>
+		<br>
+		<div class="discord-user">
+			<p><b>Verification for:</b></p>
+			<img id="discord-avatar" height="50px" width="50px" src="https://cdn.discordapp.com/embed/avatars/0.png">
+			<p id="discord-username">Loading...</p>
+		</div>
+		<br>
+		<form class="verify-form" method="post" action="submit">
+			<input class="verify-input" type="text" name="username" id="username" autocomplete="username"
+				placeholder="Imperial Short-code" required />
+			<input class="verify-input" type="password" name="password" id="password" autocomplete="current-password"
+				placeholder="Password" required />
+			<input type="hidden" name="discordID" id="discordID" autocomplete="off" value="[[discordID]]" />
+			<input class="verify-submit" type="submit" value="Let's go!" />
+		</form>
+		<br>
 	</div>
 
 	<!-- Footer -->

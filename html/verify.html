@@ -15,9 +15,24 @@
 	<link rel="icon" type="image/png" href="/favicon.ico">
 	<title>IC Anime Society</title>
 
+	<!--Script to set [[discordID]]-->
+	<script>
+		async function setDiscordID() {
+			const id = new URLSearchParams(window.location.search).get("id");
+			if (id == null) {
+				window.location.replace("/");
+			} else {
+				const { username, avatar_url } = await fetch(`/discord?id=${id}`).then((r) => r.json()).catch(console.error);
+				// const { username, avatar_url } = { username: `User #${id}`, avatar_url: "https://cdn.discordapp.com/embed/avatars/0.png" };
+				document.getElementById("discordID").value = id;
+				document.getElementById("discord-username").innerText = username;
+				document.getElementById("discord-avatar").src = avatar_url;
+			}
+		}
+	</script>
 </head>
 
-<body>
+<body onload="setDiscordID()">
 	<!-- Navbar -->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">

@@ -30,6 +30,89 @@
 			}
 		}
 	</script>
+	<style>
+		::-webkit-input-placeholder {
+			color: #fff;
+		}
+
+		:-ms-input-placeholder {
+			color: #fff;
+		}
+
+		::-ms-input-placeholder {
+			color: #fff;
+		}
+
+		:-moz-placeholder {
+			color: #fff;
+			opacity: 1;
+		}
+
+		::-moz-placeholder {
+			color: #fff;
+			opacity: 1;
+		}
+
+		.verify-body {
+			width: 100%;
+			margin: 0;
+			padding: 10px 10%;
+			background: #222;
+			color: #dddddd;
+		}
+
+		#discord-text {
+			margin-right: 10px;
+		}
+
+		.discord-user {
+			align-self: center;
+			display: flex;
+			align-items: center;
+			width: 100%;
+			text-align: center;
+			justify-content: center;
+		}
+
+		#discord-username {
+			margin-left: 10px;
+		}
+
+		.verify-form {
+			align-self: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			height: 100px;
+		}
+
+		.verify-input {
+			width: 40%;
+			margin: 3px 30%;
+			padding: 5px;
+			border: none;
+			border-radius: 6px;
+			background-color: #337ab7;
+			text-align: center;
+		}
+
+		.verify-submit {
+			width: 20%;
+			margin: 3px 40%;
+			padding: 10px;
+			border: none;
+			border-radius: 6px;
+			background-color: #337ab7;
+			color: #fff;
+			font-size: 1.5em;
+			cursor: pointer;
+		}
+
+		.verify-submit:hover,
+		.verify-submit:active {
+			background-color: #3d90d9;
+		}
+	</style>
 </head>
 
 <body onload="setDiscordID()">
@@ -110,20 +193,19 @@
 		</p>
 		<br>
 		<div class="discord-user">
-			<p><b>Verification for:</b></p>
+			<p id="discord-text"><b>Verification for:</b></p>
 			<img id="discord-avatar" height="50px" width="50px" src="https://cdn.discordapp.com/embed/avatars/0.png">
 			<p id="discord-username">Loading...</p>
 		</div>
 		<br>
 		<form class="verify-form" method="post" action="submit">
 			<input class="verify-input" type="text" name="username" id="username" autocomplete="username"
-				placeholder="Imperial Short-code" required />
+				placeholder="Imperial Shortcode (ab1234)" required />
 			<input class="verify-input" type="password" name="password" id="password" autocomplete="current-password"
 				placeholder="Password" required />
 			<input type="hidden" name="discordID" id="discordID" autocomplete="off" value="[[discordID]]" />
 			<input class="verify-submit" type="submit" value="Let's go!" />
 		</form>
-		<br>
 	</div>
 
 	<!-- Footer -->

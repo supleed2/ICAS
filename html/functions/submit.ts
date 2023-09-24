@@ -5,15 +5,34 @@ export async function onRequestPost({ request, env }) {
 	const login = await fetch("https://eactivities.union.ic.ac.uk/user/login", {
 		method: "POST",
 		body: JSON.stringify({ username: username, password: password, }),
-		headers: { "content-type": "application/json", },
-	}).catch(console.error);
+		headers: { accept: "text/html", "content-type": "application/json", },
+	});
 
-	if (login == undefined || login.status != 200) {
-		console.log(`😢 Login verification failed for discord user [${discordID}] with shortcode [${username}]`);
+	if (login.ok == false) {
+		console.log(`😢 FAILURE ${discordID}: ${username}`);
 		return Response.redirect(`${origin}/verify/failure`, 301);
 	} else {
-		console.log(`🚀 Login verification succeeded for discord user [${discordID}] with shortcode [${username}]`);
-		// TODO: Send username and discordID to Nanobot
-		return Response.redirect(`${origin}/verify/success`, 301);
+		const ck = login.headers.getSetCookie().at(0).split(";").at(0);
+		await fetch("https://eactivities.union.ic.ac.uk/details", {
+			method: "GET",
+			headers: { accept: "text/html", cookie: ck },
+		});
+		const info = await fetch("https://eactivities.union.ic.ac.uk/ajax/863/activatetabs", {
+			method: "POST",
+			headers: { accept: "application/xml, text/xml", cookie: ck }
+		}).then(r => r.text());
+		const firstname = info.match(/alias="First Name">(.*?)<\/info/)[1];
+		const surname = info.match(/alias="Surname">(.*?)<\/info/)[1];
+		console.log(`🚀 SUCCESS ${discordID}: ${username}, ${firstname} ${surname}`);
+		const submit = await fetch(env.BOT_URL, {
+			method: "POST",
+			headers: { "content-type": "application/json" },
+			body: JSON.stringify({ id: discordID, shortcode: username, fullname: `${firstname} ${surname}`, key: env.BOT_KEY }),
+		});
+		if (submit.ok) {
+			return Response.redirect(`${origin}/verify/success`, 301);
+		} else {
+			return Response.redirect(`${origin}/verify/error`, 301);
+		}
 	}
 }

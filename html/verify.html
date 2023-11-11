@@ -32,31 +32,31 @@
 	</script>
 	<style>
 		::-webkit-input-placeholder {
-			color: #fff;
+			color: #dfdfdf;
 		}
 
 		:-ms-input-placeholder {
-			color: #fff;
+			color: #dfdfdf;
 		}
 
 		::-ms-input-placeholder {
-			color: #fff;
+			color: #dfdfdf;
 		}
 
 		:-moz-placeholder {
-			color: #fff;
+			color: #dfdfdf;
 			opacity: 1;
 		}
 
 		::-moz-placeholder {
-			color: #fff;
+			color: #dfdfdf;
 			opacity: 1;
 		}
 
 		.verify-body {
 			width: 100%;
 			margin: 0;
-			padding: 10px 10% 70px;
+			padding: 10px 20%;
 			background: #222;
 			color: #dddddd;
 		}
@@ -82,8 +82,8 @@
 			align-self: center;
 			display: flex;
 			flex-direction: column;
-			justify-content: space-between;
 			height: 100px;
+			margin-bottom: 40px;
 		}
 
 		.verify-input {
@@ -111,6 +111,46 @@
 		.verify-submit:hover,
 		.verify-submit:active {
 			background-color: #3d90d9;
+		}
+
+		@media (500px < width <=1000px) {
+			.verify-form {
+				margin-bottom: 80px;
+			}
+
+			.verify-body {
+				padding: 10px 10%;
+			}
+
+			.verify-input {
+				width: 60%;
+				margin: 3px 20%;
+			}
+
+			.verify-submit {
+				width: 40%;
+				margin: 3px 30%;
+			}
+		}
+
+		@media (width <=500px) {
+			.verify-form {
+				margin-bottom: 80px;
+			}
+
+			.verify-body {
+				padding: 10px 5%;
+			}
+
+			.verify-input {
+				width: 80%;
+				margin: 3px 10%;
+			}
+
+			.verify-submit {
+				width: 60%;
+				margin: 3px 20%;
+			}
 		}
 	</style>
 </head>
